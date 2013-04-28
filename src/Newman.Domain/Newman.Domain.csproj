@@ -36,6 +36,7 @@
   <ItemGroup>
     <Compile Include="ViewModels\BaseVm.cs" />
     <Compile Include="DataRepo.cs" />
+    <Compile Include="ViewModels\MapVm.cs" />
     <Compile Include="ViewModels\PlaygroundIvm.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\Position.cs" />
