@@ -15,7 +15,7 @@
     <Page.Resources>
 
         <!-- TODO: Delete this line if the key AppName is declared in App.xaml -->
-        <x:String x:Key="AppName">My Application</x:String>
+        <x:String x:Key="AppName">Lekplatser Malmö</x:String>
         <converters:CategoryToBrushConverter x:Key="CatToBrushConverter"/>
         <DataTemplate x:Key="PushpinTemplate">
             <maps:Pushpin 
@@ -35,7 +35,8 @@
         * Row 0 contains the back button and page title
         * Row 1 contains the rest of the page layout
     -->
-    <Grid Style="{StaticResource LayoutRootStyle}">
+    <Grid Style="{StaticResource LayoutRootStyle}"
+          Background="#00693C">
         <Grid.RowDefinitions>
             <RowDefinition Height="140"/>
             <RowDefinition Height="*"/>

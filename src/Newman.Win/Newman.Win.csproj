@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Newman.Win</RootNamespace>
     <AssemblyName>Newman.Win</AssemblyName>
-    <DefaultLanguage>en-US</DefaultLanguage>
+    <DefaultLanguage>sv-se</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{BC8A1FFA-BEE3-4634-8014-F334798102B3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <PackageCertificateKeyFile>Newman.Win_TemporaryKey.pfx</PackageCertificateKeyFile>
@@ -130,6 +130,11 @@
     <None Include="Newman.Win_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\logo-150.png" />
+    <Content Include="Assets\logo-30.png" />
+    <Content Include="Assets\logo-300.png" />
+    <Content Include="Assets\logo-50.png" />
+    <Content Include="Assets\logo-620-300.png" />
     <Content Include="Assets\Logo.png" />
     <Content Include="Assets\SmallLogo.png" />
     <Content Include="Assets\SplashScreen.png" />
