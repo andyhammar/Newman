@@ -20,7 +20,7 @@ namespace Newman.Win.Common
         /// Checks if a property already matches a desired value.  Sets the property and
         /// notifies listeners only when necessary.
         /// </summary>
-        /// <typeparam name="T">Type of the property.</typeparam>
+        /// <typeparam name="T">Category of the property.</typeparam>
         /// <param name="storage">Reference to a property with both getter and setter.</param>
         /// <param name="value">Desired value for the property.</param>
         /// <param name="propertyName">Name of the property used to notify listeners.  This
