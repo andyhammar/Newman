@@ -12,7 +12,9 @@
     <DefaultLanguage>sv-se</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{BC8A1FFA-BEE3-4634-8014-F334798102B3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <PackageCertificateKeyFile>Newman.Win_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateKeyFile>Newman.Win_StoreKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateThumbprint>2948B38F072642AF362B1342F490C3A3333A61B3</PackageCertificateThumbprint>
+    <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -115,6 +117,7 @@
     <Compile Include="Common\BooleanToVisibilityConverter.cs" />
     <Compile Include="Common\LayoutAwarePage.cs" />
     <Compile Include="Common\RichTextColumns.cs" />
+    <Compile Include="Common\SettingsHelper.cs" />
     <Compile Include="Common\SuspensionManager.cs" />
     <Compile Include="Converters\CategoryToBrushConverter.cs" />
     <Compile Include="Converters\Extensions.cs" />
@@ -127,6 +130,7 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <None Include="Newman.Win_StoreKey.pfx" />
     <None Include="Newman.Win_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
@@ -140,6 +144,7 @@
     <Content Include="Assets\SplashScreen.png" />
     <Content Include="Assets\StoreLogo.png" />
     <Content Include="Common\ReadMe.txt" />
+    <None Include="Package.StoreAssociation.xml" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">

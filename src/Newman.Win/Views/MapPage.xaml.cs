@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Bing.Maps;
 using Newman.Domain.ViewModels;
 using Newman.Win.Common;
+using Windows.UI.ApplicationSettings;
 using Windows.UI.Xaml.Controls;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237
@@ -22,9 +23,16 @@ namespace Newman.Win.Views
             _vm = new MapVm();
             DataContext = _vm;
 
-
+                                    SettingsPane.GetForCurrentView().CommandsRequested += GroupedItemsPage_CommandsRequested;
 
         }
+
+
+        void GroupedItemsPage_CommandsRequested(SettingsPane sender, SettingsPaneCommandsRequestedEventArgs args)
+        {
+            SettingsHelper.AddSettingsCommands(args);
+        }
+        
 
         /// <summary>
         /// Populates the page with content passed during navigation.  Any saved state is also

@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest">
-  <Identity Name="b46aaba4-4953-49f7-94f5-b6e708757474" Publisher="CN=Andreas" Version="1.0.0.0" />
+  <Identity Name="21411AndreasHammar.LekplatserMalm" Publisher="CN=FA18167A-309D-4036-BC20-56EAF537BC91" Version="1.0.0.2" />
   <Properties>
     <DisplayName>Lekplatser Malmö</DisplayName>
-    <PublisherDisplayName>Andreas</PublisherDisplayName>
+    <PublisherDisplayName>Andreas Hammar</PublisherDisplayName>
     <Logo>Assets\logo-50.png</Logo>
   </Properties>
   <Prerequisites>

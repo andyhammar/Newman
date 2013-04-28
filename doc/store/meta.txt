@@ -1,0 +1,4 @@
+Visar alla Malmös lekplatser på en karta. Olika färg för Gym, Närlekplats, Kvarterslekplats, Temalekplats, Stadsdelslekplats och Områdeslekplats.
+
+Inofficiell app, inte utvecklad av Malmö Stad.
+

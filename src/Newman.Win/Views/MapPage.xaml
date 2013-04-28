@@ -20,7 +20,7 @@
         <DataTemplate x:Key="PushpinTemplate">
             <maps:Pushpin 
                 
-                ToolTipService.ToolTip="{Binding Name}" 
+                ToolTipService.ToolTip="{Binding FullText}" 
                 Background="{Binding Category, Converter={StaticResource CatToBrushConverter}}"
                 >
                 <maps:MapLayer.Position>
