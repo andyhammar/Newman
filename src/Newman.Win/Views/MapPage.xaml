@@ -8,7 +8,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:maps="using:Bing.Maps"
-    xmlns:viewModels="using:Newman.Domain.ViewModels"
+    xmlns:viewModels="using:Newman.Domain.ViewModels" xmlns:converters="using:Newman.Win.Converters"
     mc:Ignorable="d"
     d:DataContext="{d:DesignInstance Type=viewModels:MapVm, IsDesignTimeCreatable=true}">
 
@@ -16,15 +16,17 @@
 
         <!-- TODO: Delete this line if the key AppName is declared in App.xaml -->
         <x:String x:Key="AppName">My Application</x:String>
-
+        <converters:CategoryToBrushConverter x:Key="CatToBrushConverter"/>
         <DataTemplate x:Key="PushpinTemplate">
             <maps:Pushpin 
                 
-                ToolTipService.ToolTip="{Binding TooltipText}" >
+                ToolTipService.ToolTip="{Binding Name}" 
+                Background="{Binding Category, Converter={StaticResource CatToBrushConverter}}"
+                >
                 <maps:MapLayer.Position>
                     <maps:Location Latitude="{Binding Position.Lat}" Longitude="{Binding Position.Lng}"/>
                 </maps:MapLayer.Position>
-                </maps:Pushpin>
+            </maps:Pushpin>
         </DataTemplate>
     </Page.Resources>
 

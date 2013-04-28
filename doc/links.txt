@@ -3,3 +3,6 @@ http://latlong.mellifica.se/
 https://github.com/bjornsallarp/MightyLittleGeodesy
 
 http://blog.sallarp.com/wp-content/uploads/2009/05/mightylittlegeodesy-dotnet2.zip
+
+http://www.bing.com/blogs/site_blogs/b/maps/archive/2012/11/05/getting-started-with-bing-maps-windows-store-apps-native.aspx
+
