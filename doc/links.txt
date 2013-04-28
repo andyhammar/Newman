@@ -1,0 +1,5 @@
+http://latlong.mellifica.se/
+
+https://github.com/bjornsallarp/MightyLittleGeodesy
+
+http://blog.sallarp.com/wp-content/uploads/2009/05/mightylittlegeodesy-dotnet2.zip
