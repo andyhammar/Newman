@@ -1,15 +1,14 @@
 ﻿<Application
     x:Class="Newman.Win.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Newman.Win">
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Common/StandardStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-            <x:String x:Key="AppName">Lekplatser Lomma</x:String>
+            <x:String x:Key="AppName">Lekplatser Stockholm</x:String>
 
         </ResourceDictionary>
     </Application.Resources>

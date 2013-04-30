@@ -2,7 +2,7 @@
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest">
   <Identity Name="21411AndreasHammar.LekplatserLomma" Publisher="CN=FA18167A-309D-4036-BC20-56EAF537BC91" Version="1.0.0.3" />
   <Properties>
-    <DisplayName>Lekplatser Lomma</DisplayName>
+    <DisplayName>Lekplatser Stockholm</DisplayName>
     <PublisherDisplayName>Andreas Hammar</PublisherDisplayName>
     <Logo>Assets\logo-50.png</Logo>
   </Properties>
@@ -15,7 +15,7 @@
   </Resources>
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="Newman.Win.App">
-      <VisualElements DisplayName="Lekplatser Lomma" Logo="Assets\logo-150.png" SmallLogo="Assets\logo-30.png" Description="Visar lekplatser i Lomma" ForegroundText="light" BackgroundColor="#D6371B">
+      <VisualElements DisplayName="Lekplatser Stockholm" Logo="Assets\logo-150.png" SmallLogo="Assets\logo-30.png" Description="Visar lekplatser i Stockholm" ForegroundText="light" BackgroundColor="#3A71A9">
         <DefaultTile ShowName="allLogos" />
         <SplashScreen Image="Assets\logo-620-300.png" BackgroundColor="#FFFFFF" />
       </VisualElements>
