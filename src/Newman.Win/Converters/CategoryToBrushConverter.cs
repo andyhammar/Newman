@@ -27,7 +27,7 @@ namespace Newman.Win.Converters
                     {"Områdeslekplats", 
                         Colors.ForestGreen.ToBrush()},
                 };
-            DefaultBrush = Colors.Black.ToBrush();
+            DefaultBrush = Colors.DarkSlateBlue.ToBrush();
         }
 
         public static Dictionary<string, SolidColorBrush> CategoryToBrushDict;

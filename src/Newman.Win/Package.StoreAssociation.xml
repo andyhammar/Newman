@@ -337,15 +337,17 @@
     <Language Code="zu-za" InMinimumRequirementSet="false" />
   </SupportedLocales>
   <ProductReservedInfo>
-    <MainPackageIdentityName>21411AndreasHammar.LekplatserMalm</MainPackageIdentityName>
+    <MainPackageIdentityName>21411AndreasHammar.LekplatserLomma</MainPackageIdentityName>
     <ReservedNames>
-      <ReservedName>Lekplatser Malmö</ReservedName>
+      <ReservedName>Lekplatser Lomma</ReservedName>
     </ReservedNames>
   </ProductReservedInfo>
   <AccountPackageIdentityNames>
     <MainPackageIdentityName>21411AndreasHammar.Ekot</MainPackageIdentityName>
+    <MainPackageIdentityName>21411AndreasHammar.LekplatserMalm</MainPackageIdentityName>
+    <MainPackageIdentityName>21411AndreasHammar.LekplatserStockholm</MainPackageIdentityName>
     <MainPackageIdentityName>21411AndreasHammar.ShowmetheIP</MainPackageIdentityName>
     <MainPackageIdentityName>21411AndreasHammar.VinylShopper</MainPackageIdentityName>
   </AccountPackageIdentityNames>
-  <PackageInfoList LandingUrl="https://appdev.microsoft.com:443/StorePortals/Developer/Catalog/ReleaseAnchor/9c7cb02b-b7e9-41cf-82e1-d0a37f1b7c52" />
+  <PackageInfoList LandingUrl="https://appdev.microsoft.com:443/StorePortals/Developer/Catalog/ReleaseAnchor/f181c991-6bc8-4186-8495-791dc01a204e" />
 </StoreAssociation>

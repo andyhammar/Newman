@@ -14,8 +14,6 @@
 
     <Page.Resources>
 
-        <!-- TODO: Delete this line if the key AppName is declared in App.xaml -->
-        <x:String x:Key="AppName">Lekplatser Malmö</x:String>
         <converters:CategoryToBrushConverter x:Key="CatToBrushConverter"/>
         <DataTemplate x:Key="PushpinTemplate">
             <maps:Pushpin 

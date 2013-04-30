@@ -16,7 +16,7 @@ namespace Newman.Domain.ViewModels
 
         public async Task Init()
         {
-            var dataRepo = new DataRepoMalmo();
+            var dataRepo = new DataRepoLomma();
             Playgrounds = await dataRepo.GetPlaygroundsAsync();
 
             UpdateCenter();
