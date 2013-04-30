@@ -15,9 +15,9 @@
   </Resources>
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="Newman.Win.App">
-      <VisualElements DisplayName="Lekplatser Lomma" Logo="Assets\logo-150.png" SmallLogo="Assets\logo-30.png" Description="Visar lekplatser i Lomma" ForegroundText="light" BackgroundColor="#00693C">
+      <VisualElements DisplayName="Lekplatser Lomma" Logo="Assets\logo-150.png" SmallLogo="Assets\logo-30.png" Description="Visar lekplatser i Lomma" ForegroundText="light" BackgroundColor="#D6371B">
         <DefaultTile ShowName="allLogos" />
-        <SplashScreen Image="Assets\logo-620-300.png" />
+        <SplashScreen Image="Assets\logo-620-300.png" BackgroundColor="#FFFFFF" />
       </VisualElements>
     </Application>
   </Applications>
