@@ -34,6 +34,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="DataRepoStockholm.cs" />
     <Compile Include="DataRepoLomma.cs" />
     <Compile Include="GeoService.cs" />
     <Compile Include="IDataRepo.cs" />
@@ -43,6 +44,7 @@
     <Compile Include="ViewModels\PlaygroundIvm.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\Position.cs" />
+    <None Include="app.config" />
     <None Include="Fody.targets" />
     <None Include="FodyWeavers.xml" />
     <None Include="packages.config" />
@@ -57,9 +59,21 @@
     <Reference Include="MightyLittleGeodesyPcl">
       <HintPath>..\..\lib\MightyLittleGeodesyPcl.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\Newman.Win\packages\Newtonsoft.Json.5.0.4\lib\portable-net40+sl4+wp7+win8\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="PropertyChanged">
       <HintPath>..\Newman.Win\packages\PropertyChanged.Fody.1.36.2.3\Lib\portable-net4+sl4+wp7+win8\PropertyChanged.dll</HintPath>
       <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Net.Http">
+      <HintPath>..\Newman.Win\packages\Microsoft.Net.Http.2.1.3-beta\lib\portable-net40+sl4+win8+wp71\System.Net.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Extensions">
+      <HintPath>..\Newman.Win\packages\Microsoft.Net.Http.2.1.3-beta\lib\portable-net40+sl4+win8+wp71\System.Net.Http.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Primitives">
+      <HintPath>..\Newman.Win\packages\Microsoft.Net.Http.2.1.3-beta\lib\portable-net40+sl4+win8+wp71\System.Net.Http.Primitives.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime">
       <HintPath>..\Newman.Win\packages\Microsoft.Bcl.1.0.19\lib\portable-net40+sl4+win8+wp71\System.Runtime.dll</HintPath>

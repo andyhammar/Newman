@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<!-- saved from url=(0038)http://api.stockholm.se/dokumentation/ -->
+<html lang="sv" slick-uniqueid="3"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+
+    <title>Stockholm stad enhetsdata-api-dokumentation</title>
+    <meta name="description" content="Dokumentation av Stockholm stads öppna APIer för Enhetsdatabasen och Platsdatabasen">
+    <meta name="keywords" content="enhetsdatabasen, platsdatabasen, dokumentation, öppet api">
+
+    <link rel="stylesheet" href="http://api.stockholm.se/dokumentation/styles/style.css">
+    <link rel="stylesheet" href="http://api.stockholm.se/dokumentation/styles/sausage.css">
+    <link rel="stylesheet" href="http://api.stockholm.se/dokumentation/styles/sh/shCore.css">
+    <link rel="stylesheet" href="http://api.stockholm.se/dokumentation/styles/sh/shCoreDefault.css">
+
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+<style type="text/css"></style></head>
+<body>
+
+
+<header class="site-header">
+    <div id="logo">
+        <img src="./Stockholm stad enhetsdata-api-dokumentation_files/sterik.gif" alt="logotyp">
+    </div>
+    <h1>Dokumentation</h1>
+</header>
+
+<article>
+<h1>Dokumentation av API för Enhetsdatabasen och Platsdatabasen</h1>
+
+<section class="preamble">
+    <h2>Inledning</h2>
+
+    <p>
+        Här beskrivs kortfattat hur utvecklare kan hämta information
+        om Stockholm stads enhetsdatabas och platsdatabas.
+        Data hämtas via HTTP/GET och formatet är XML eller JSON.
+    </p>
+
+    <p>Dokumentationen omfattar både Enhetsdatabasen och Platsdatabasen.</p>
+</section>
+
+<section>
+    <h2>Revisionslogg för detta dokument</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Datum</th>
+            <th>Meddelande</th>
+        </tr>
+        </thead><tbody>
+        <tr>
+            <td>
+                <time datetime="2012-02-28">2012-02-28</time>
+            </td>
+            <td>Korrigering av parametertyp från RT90 till RT90 2.5 g V i listan över parameterar.</td>
+        </tr>
+        <tr>
+            <td>
+                <time datetime="2012-02-23">2012-02-23</time>
+            </td>
+            <td>Ny dokumentation för JSON med padding och felmeddelanden. Ny funktionalitet i apierna ang. "Count endpoint" på listor och bildskalningsfunktionalitet. </td>
+        </tr>
+        <tr>
+            <td>
+                <time datetime="2012-02-20">2012-02-20</time>
+            </td>
+            <td>Avsnittet Adresser och information har uppdaterats.</td>
+        </tr>
+        <tr>
+            <td>
+                <time datetime="2012-02-20">2012-02-20</time>
+            </td>
+            <td>Avsnittet Parametrar har uppdaterats.</td>
+        </tr>
+        </tbody>
+    </table>
+
+</section>
+
+<section>
+    <h2>Adresser och information</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Tjänst</th>
+            <th>Adress</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>API-nyckelhantering</td>
+            <td><a href="http://api.stockholm.se/">http://api.stockholm.se/</a></td>
+        </tr>
+        <tr>
+            <td>Enhetsdatabasen</td>
+            <td><a href="http://api.stockholm.se/ServiceGuideService">http://api.stockholm.se/ServiceGuideService</a>
+            </td>
+        </tr>
+        <tr>
+            <td>Platsdatabasen</td>
+            <td><a href="http://api.stockholm.se/PlaceService">http://api.stockholm.se/PlaceService</a></td>
+        </tr>
+        <tr>
+            <td>Komplett endpointförteckning,<br> Enhetsdatabasens API</td>
+            <td><a href="http://api.stockholm.se/ServiceGuideService/Help">http://api.stockholm.se/ServiceGuideService/Help</a>
+            </td>
+        </tr>
+        <tr>
+            <td>Komplett endpointförteckning,<br> Platsdatabasens API</td>
+            <td><a href="http://api.stockholm.se/PlaceService/Help">http://api.stockholm.se/PlaceService/Help</a></td>
+        </tr>
+        </tbody>
+    </table>
+
+</section>
+
+<section>
+    <h2>Api-nyckel / authentisering</h2>
+
+    <p>
+        Att hämta data från Stockholm stads API-er kräver en API-
+        nyckel per API-tjänst. Skapa en api-nyckel på <a href="http://api.stockholm.se/">http://api.stockholm.se</a>
+
+        För varje HTTP/GET-anrop skall parametern <span class="example-key">apikey</span> plus värde finnas
+        med för att data skall presenteras.</p>
+
+    <dl class="example">
+        <dt>Exempel på anrop med parameter:</dt>
+        <dd class="example-url">
+            http://api.stockholm.se/ServiceGuideService/?<strong>apikey</strong>=<strong>yourpersonalkey</strong>...
+        </dd>
+    </dl>
+
+</section>
+<section>
+    <h2>Endpoints</h2>
+
+    <p>En "endpoint" är det sista katalognamnet före sista och avslutande
+        "/". Allt efter en "endpoint" ses som en "identifikator".</p>
+
+    <dl class="example">
+        <dt>Exempel på "endpoint":</dt>
+        <dd><span class="example-key">/ServiceGuideService/</span> är <strong>endpoint</strong> i anropet
+            <span class="example-url">http://api.stockholm.se/ServiceGuideService/?apikey=yourpersonalkey...</span>
+        </dd>
+    </dl>
+
+</section>
+<section>
+    <h2>Listning / segmentering</h2>
+
+    <p>
+        Enhetsdata kan nås genom många olika anrop. Utifrån resultatet kan
+        man läsa ut hur man vidare segmenterar resultatet:
+    </p>
+
+    <dl class="example">
+        <dt>Exempel på listning/segmentering</dt>
+        <dd>
+            Anropet listar alla möjliga listor (s.k. "start endpoint"):
+            <span class="example-url">http://api.stockholm.se/ServiceGuideService/?apikey=yourpersonalkey...</span>
+        </dd>
+
+    </dl>
+    <p>
+        Ger (bl a):
+    </p>
+  <div><div id="highlighter_789060" class="syntaxhighlighter  xml"><div class="toolbar"><span><a href="http://api.stockholm.se/dokumentation/#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="xml plain">&lt;</code><code class="xml keyword">Lists</code><code class="xml plain">&gt;</code></div><div class="line number2 index1 alt1"><code class="xml spaces">&nbsp;&nbsp;</code><code class="xml plain">&lt;</code><code class="xml keyword">List</code> <code class="xml color1">name</code><code class="xml plain">=</code><code class="xml string">"ServiceUnits"</code> <code class="xml color1">uri</code><code class="xml plain">=</code><code class="xml string">"ServiceUnits"</code><code class="xml plain">/&gt;</code></div><div class="line number3 index2 alt2"><code class="xml spaces">&nbsp;&nbsp;</code><code class="xml plain">&lt;</code><code class="xml keyword">List</code> <code class="xml color1">name</code><code class="xml plain">=</code><code class="xml string">"ServiceUnitTypes"</code> <code class="xml color1">uri</code><code class="xml plain">=</code><code class="xml string">"ServiceUnitTypes"</code><code class="xml plain">/&gt;</code></div><div class="line number4 index3 alt1"><code class="xml spaces">&nbsp;&nbsp;</code><code class="xml plain">&lt;</code><code class="xml keyword">List</code> <code class="xml color1">name</code><code class="xml plain">=</code><code class="xml string">"ServiceUnitTypeGroups"</code> <code class="xml color1">uri</code><code class="xml plain">=</code><code class="xml string">"ServiceUnitTypeGroups"</code><code class="xml plain">/&gt;</code></div><div class="line number5 index4 alt2"><code class="xml spaces">&nbsp;&nbsp;</code><code class="xml plain">&lt;</code><code class="xml keyword">List</code> <code class="xml color1">name</code><code class="xml plain">=</code><code class="xml string">"GeographicalAreas"</code> <code class="xml color1">uri</code><code class="xml plain">=</code><code class="xml string">"GeographicalAreas"</code><code class="xml plain">/&gt;</code></div><div class="line number6 index5 alt1"><code class="xml spaces">&nbsp;&nbsp;</code><code class="xml plain">&lt;</code><code class="xml keyword">List</code> <code class="xml color1">name</code><code class="xml plain">=</code><code class="xml string">"Files"</code> <code class="xml color1">uri</code><code class="xml plain">=</code><code class="xml string">"Files"</code><code class="xml plain">/&gt;</code></div><div class="line number7 index6 alt2"><code class="xml plain">&lt;/</code><code class="xml keyword">Lists</code><code class="xml plain">&gt;</code></div></div></td></tr></tbody></table></div></div>
+    <p>Utifrån resultaten ovan kan vi via informationen i attributet "uri":
+    </p>
+    <ul>
+        <li>Lista alla serviceenheter
+        </li>
+        <li>
+            Lista alla enhetstyper
+        </li>
+        <li>
+            Lista alla enhetstypsgrupper
+        </li>
+        <li>
+            Lista alla geografiska områden
+
+        </li>
+        <li>
+            Lista alla filer tillhörande alla enheter
+        </li>
+    </ul>
+
+    <dl class="example">
+        <dt>Exempel på alla enhetstyper:</dt>
+        <dd class="example-url">http://api.stockholm.se/ServiceGuideService/ServiceUnitTypes?apikey=yourpersonalkey...
+        </dd>
+    </dl>
+
+    <p>Ger:</p>
+  
+<div><div id="highlighter_607495" class="syntaxhighlighter  xml"><div class="toolbar"><span><a href="http://api.stockholm.se/dokumentation/#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div><div class="line number13 index12 alt2">13</div><div class="line number14 index13 alt1">14</div><div class="line number15 index14 alt2">15</div><div class="line number16 index15 alt1">16</div><div class="line number17 index16 alt2">17</div><div class="line number18 index17 alt1">18</div><div class="line number19 index18 alt2">19</div><div class="line number20 index19 alt1">20</div><div class="line number21 index20 alt2">21</div><div class="line number22 index21 alt1">22</div><div class="line number23 index22 alt2">23</div><div class="line number24 index23 alt1">24</div><div class="line number25 index24 alt2">25</div><div class="line number26 index25 alt1">26</div><div class="line number27 index26 alt2">27</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="xml plain">&lt;</code><code class="xml keyword">ServiceUnitTypeInfos</code><code class="xml plain">&gt;</code></div><div class="line number2 index1 alt1"><code class="xml spaces">&nbsp;&nbsp;</code><code class="xml plain">&lt;</code><code class="xml keyword">ServiceUnitTypeInfo</code> <code class="xml color1">id</code><code class="xml plain">=</code><code class="xml string">"9911eb71-854b-4033-9f90-00ab2a72d739"</code></div><div class="line number3 index2 alt2"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml color1">singularName</code><code class="xml plain">=</code><code class="xml string">"Personlig assistans"</code><code class="xml plain">/&gt;</code></div><div class="line number4 index3 alt1"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml plain">&lt;</code><code class="xml keyword">ServiceUnitTypeInfo</code> <code class="xml color1">id</code><code class="xml plain">=</code><code class="xml string">"a4116a6a-af53-4672-b492-01d7adeae987"</code></div><div class="line number5 index4 alt2"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml color1">singularName</code><code class="xml plain">=</code><code class="xml string">"Motionsspår"</code><code class="xml plain">/&gt;</code></div><div class="line number6 index5 alt1"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml plain">&lt;</code><code class="xml keyword">ServiceUnitTypeInfo</code> <code class="xml color1">id</code><code class="xml plain">=</code><code class="xml string">"fd27590d-11ad-4811-9327-13e5a9fe9794"</code></div><div class="line number7 index6 alt2"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml color1">singularName</code><code class="xml plain">=</code><code class="xml string">"Konsthall"</code><code class="xml plain">/&gt;</code></div><div class="line number8 index7 alt1"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml plain">&lt;</code><code class="xml keyword">ServiceUnitTypeInfo</code> <code class="xml color1">id</code><code class="xml plain">=</code><code class="xml string">"3a8dadd5-e10c-415c-8b37-1a25729afffa"</code></div><div class="line number9 index8 alt2"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml color1">singularName</code><code class="xml plain">=</code><code class="xml string">"Familjedaghem"</code><code class="xml plain">/&gt;</code></div><div class="line number10 index9 alt1"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml plain">&lt;</code><code class="xml keyword">ServiceUnitTypeInfo</code> <code class="xml color1">id</code><code class="xml plain">=</code><code class="xml string">"466546ad-0a60-4e3a-ba51-2559d9c79950"</code></div><div class="line number11 index10 alt2"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml color1">singularName</code><code class="xml plain">=</code><code class="xml string">"Koloniträdgård"</code><code class="xml plain">/&gt;</code></div><div class="line number12 index11 alt1"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml plain">&lt;</code><code class="xml keyword">ServiceUnitTypeInfo</code> <code class="xml color1">id</code><code class="xml plain">=</code><code class="xml string">"930b3308-43e9-471f-b8f4-2bf4f135e30d"</code></div><div class="line number13 index12 alt2"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml color1">singularName</code><code class="xml plain">=</code><code class="xml string">"Ledsagning"</code><code class="xml plain">/&gt;</code></div><div class="line number14 index13 alt1"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml plain">&lt;</code><code class="xml keyword">ServiceUnitTypeInfo</code> <code class="xml color1">id</code><code class="xml plain">=</code><code class="xml string">"c72b4fcc-3f50-4dc4-aac3-303c6797d430"</code></div><div class="line number15 index14 alt2"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml color1">singularName</code><code class="xml plain">=</code><code class="xml string">"Hemtjänst"</code><code class="xml plain">/&gt;</code></div><div class="line number16 index15 alt1"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml plain">&lt;</code><code class="xml keyword">ServiceUnitTypeInfo</code> <code class="xml color1">id</code><code class="xml plain">=</code><code class="xml string">"f1f37ab7-8f65-40fe-97cb-31676d1bab34"</code></div><div class="line number17 index16 alt2"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml color1">singularName</code><code class="xml plain">=</code><code class="xml string">"Servicebostad"</code><code class="xml plain">/&gt;</code></div><div class="line number18 index17 alt1"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml plain">&lt;</code><code class="xml keyword">ServiceUnitTypeInfo</code> <code class="xml color1">id</code><code class="xml plain">=</code><code class="xml string">"4effe8e3-ef54-4f43-8d50-372a4495d435"</code></div><div class="line number19 index18 alt2"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml color1">singularName</code><code class="xml plain">=</code><code class="xml string">"Servicehus"</code><code class="xml plain">/&gt;</code></div><div class="line number20 index19 alt1"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml plain">&lt;</code><code class="xml keyword">ServiceUnitTypeInfo</code> <code class="xml color1">id</code><code class="xml plain">=</code><code class="xml string">"10031f76-001a-4a00-9e2a-3b1a166ebf6f"</code></div><div class="line number21 index20 alt2"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml color1">singularName</code><code class="xml plain">=</code><code class="xml string">"Simhall"</code><code class="xml plain">/&gt;</code></div><div class="line number22 index21 alt1"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml comments">&lt;!-- more rows --&gt;</code></div><div class="line number23 index22 alt2"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml plain">&lt;</code><code class="xml keyword">ServiceUnitTypeInfo</code> <code class="xml color1">id</code><code class="xml plain">=</code><code class="xml string">"fcc0db7f-065e-43f9-94f0-fb7c4467ffde"</code></div><div class="line number24 index23 alt1"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml color1">singularName</code><code class="xml plain">=</code><code class="xml string">"Vinterfotbollsplan"</code><code class="xml plain">/&gt;</code></div><div class="line number25 index24 alt2"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml plain">&lt;</code><code class="xml keyword">ServiceUnitTypeInfo</code> <code class="xml color1">id</code><code class="xml plain">=</code><code class="xml string">"ac4854fb-fba3-4d01-83ce-ff7992310846"</code></div><div class="line number26 index25 alt1"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml color1">singularName</code><code class="xml plain">=</code><code class="xml string">"Återvinningscentral"</code><code class="xml plain">/&gt;</code></div><div class="line number27 index26 alt2"><code class="xml plain">&lt;/</code><code class="xml keyword">ServiceUnitTypeInfos</code><code class="xml plain">&gt;</code></div></div></td></tr></tbody></table></div></div>
+    <p>
+        Vidare information om en enhetstyp. Detta fall enhetstypen "Simhall"
+        där attributet <span class="example-key">id</span> används som identifikator på endpoint <span class="example-url">/ServiceUnitTypes/</span>.
+    </p>
+
+
+    <dl class="example">
+        <dt>Exempel:</dt>
+        <dd class="example-url">http://api.stockholm.se/ServiceGuideService/ServiceUnitTypes/<strong>10031f76-001a-4a00-9e2a-3b1a166ebf6f</strong>?apikey=yourpersonalkey...
+        </dd>
+    </dl>
+
+  <div><div id="highlighter_209633" class="syntaxhighlighter  xml"><div class="toolbar"><span><a href="http://api.stockholm.se/dokumentation/#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="xml plain">&lt;</code><code class="xml keyword">ServiceUnitType</code> <code class="xml color1">id</code><code class="xml plain">=</code><code class="xml string">"10031f76-001a-4a00-9e2a-3b1a166ebf6f"</code></div><div class="line number2 index1 alt1"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml color1">singularName</code><code class="xml plain">=</code><code class="xml string">"Simhall"</code> <code class="xml color1">pluralName</code><code class="xml plain">=</code><code class="xml string">"Simhallar"</code></div><div class="line number3 index2 alt2"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml color1">definitiveName</code><code class="xml plain">=</code><code class="xml string">"Simhallen"</code> <code class="xml color1">timeCreated</code><code class="xml plain">=</code><code class="xml string">"2009-01-07T10:23:38.217"</code></div><div class="line number4 index3 alt1"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml color1">timeUpdated</code><code class="xml plain">=</code><code class="xml string">"2009-01-07T10:23:38.217"</code><code class="xml plain">&gt;</code></div><div class="line number5 index4 alt2"><code class="xml spaces">&nbsp;&nbsp;</code><code class="xml plain">&lt;</code><code class="xml keyword">ServiceUnitTypeGroupInfo</code> <code class="xml color1">id</code><code class="xml plain">=</code><code class="xml string">"3"</code> <code class="xml color1">name</code><code class="xml plain">=</code><code class="xml string">"Idrott/Motion"</code><code class="xml plain">/&gt;</code></div><div class="line number6 index5 alt1"><code class="xml spaces">&nbsp;&nbsp;</code><code class="xml plain">&lt;</code><code class="xml keyword">Lists</code><code class="xml plain">&gt;</code></div><div class="line number7 index6 alt2"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml plain">&lt;</code><code class="xml keyword">List</code> <code class="xml color1">name</code><code class="xml plain">=</code><code class="xml string">"ServiceUnits"</code> <code class="xml color1">uri</code><code class="xml plain">=</code><code class="xml string">"ServiceUnits"</code><code class="xml plain">/&gt;</code></div><div class="line number8 index7 alt1"><code class="xml spaces">&nbsp;&nbsp;</code><code class="xml plain">&lt;/</code><code class="xml keyword">Lists</code><code class="xml plain">&gt;</code></div><div class="line number9 index8 alt2"><code class="xml plain">&lt;/</code><code class="xml keyword">ServiceUnitType</code><code class="xml plain">&gt;</code></div></div></td></tr></tbody></table></div></div>
+    <p>
+        På detta sätt kan man bläddra igenom hela enhetsdatabasen.
+    </p>
+
+</section>
+
+
+<section>
+    <h2>
+        Sökning
+    </h2>
+
+    <p>
+        Metod s.k "endpoint" som tar parameter <span class="example-key">name</span> är "ServiceUnits"
+        och kan användas för att söka bland enheter.
+        Exempel:
+    </p>
+    <dl class="example">
+        <dt>Exempel: Sök efter enhet, där namn innehåller "Akalla"</dt>
+        <dd class="example-url">
+            http://api.stockholm.se/ServiceGuideService.svc/ServiceUnits?apikey=yourpersonalkey&amp;<strong>name=akalla</strong>
+        </dd>
+    </dl>
+</section>
+
+<section>
+    <h2>Format</h2>
+
+    <p>
+        Standardformat är XML. JSON levereras om man lägger till <span class="example-key">json</span> som
+        ytterligare en identifikator. T ex
+        <span class="example-url">http://api.stockholm.se/ServiceGuideService/ServiceUnitTypes<strong>/json</strong>?apikey=yourpersonalkey</span>
+    </p>
+</section>
+
+<section>
+    <h2>JSON och JSON med padding</h2>
+
+    <p>
+        Standardformat är XML. JSON levereras om man lägger till <span class="example-key">json</span> som
+        ytterligare en identifikator. T ex
+        <span class="example-url">http://api.stockholm.se/ServiceGuideService/ServiceUnitTypes<strong>/json</strong>?apikey=yourpersonalkey</span>
+    </p>
+
+    <h3>JSON med padding (Callback)</h3>
+
+    <p>I kombination med <span class="example-key">json</span> kan parameter <span class="example-key">callback</span>
+        anges. Då retuneras resultatet omslutet med värdet för
+        <span class="example-key">callback</span>. Det ger s.k JSON med padding</p>
+
+    <p><span class="example-url">http://api.stockholm.se/ServiceGuideService/ServiceUnitTypes<strong>/json</strong>?apikey=yourpersonalkey&amp;<strong>callback=myFunc</strong></span>
+    </p>
+</section>
+
+<section>
+    <h2>Felmeddelanden</h2>
+
+    <p>Felmeddelanden retuneras med http statuskod och ett felmeddelande ifall APIerna inte kan tolka och retunera
+        information</p>
+
+    <h3>Exempel på felmeddelande</h3>
+
+    <div><div id="highlighter_651474" class="syntaxhighlighter  xml"><div class="toolbar"><span><a href="http://api.stockholm.se/dokumentation/#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="xml plain">&lt;</code><code class="xml keyword">Error</code> <code class="xml color1">xmlns</code><code class="xml plain">=</code><code class="xml string">"<a href="http://schemas.datacontract.org/2004/07/Stockholm.Web.Api">http://schemas.datacontract.org/2004/07/Stockholm.Web.Api</a>"</code> <code class="xml color1">xmlns:i</code><code class="xml plain">=</code><code class="xml string">"<a href="http://www.w3.org/2001/XMLSchema-instance">http://www.w3.org/2001/XMLSchema-instance</a>"</code><code class="xml plain">&gt;</code></div><div class="line number2 index1 alt1"><code class="xml spaces">&nbsp;&nbsp;</code><code class="xml plain">&lt;</code><code class="xml keyword">Description</code><code class="xml plain">&gt;Invalid API key or API key not specified&lt;/</code><code class="xml keyword">Description</code><code class="xml plain">&gt;</code></div><div class="line number3 index2 alt2"><code class="xml spaces">&nbsp;&nbsp;</code><code class="xml plain">&lt;</code><code class="xml keyword">HttpStatusCode</code><code class="xml plain">&gt;403&lt;/</code><code class="xml keyword">HttpStatusCode</code><code class="xml plain">&gt;</code></div><div class="line number4 index3 alt1"><code class="xml plain">&lt;/</code><code class="xml keyword">Error</code><code class="xml plain">&gt;</code></div></div></td></tr></tbody></table></div></div>
+</section>
+
+<section>
+    <h2>Vidareutveckling och frågor</h2>
+
+    <p>
+        APIet kommer att utvecklas vidare varefter behov uppstår. Frågor och synpunkter hanteras via Google Grupper: <a href="http://groups.google.com/group/enhetsdataistockholmsstad">Enhetsdataistockholmstad</a></p>
+</section>
+
+<section>
+    <h2>Exempel på hur APIet kan användas</h2>
+
+    <h3>Hämta data om en specifik enhet: T.ex. Medborgarplatsens bibliotek</h3>
+
+    <ol>
+        <li><p>Lista alla enhetestyper genom att använda anropet:
+            <span class="example-url">http://api.stockholm.se/ServiceGuideService/<em>ServiceUnitTypes</em>?apikey=yourpersonalkey</span>
+        </p>
+
+            <p>Det ger dig <span class="example-key">id</span> för enhetstypen bibliotek som kan användas för nästa
+                anrop.</p>
+        </li>
+
+        <li><p>Anropa APIet igen med information om enhetstypen Biblioteks id.</p>
+
+            <p><span class="example-url">http://api.stockholm.se/ServiceGuideService/ServiceUnitTypes/<em>9ff1c3b5-f2e9-45b4-a478-caa09d923417</em>?apikey=yourpersonalkey</span>
+            </p>
+        </li>
+
+        <li>
+            <p>
+                Hämta alla enheter inom enhetstypen bibliotek genom att använda anropet:
+            </p>
+
+            <p>
+                <span class="example-url">http://api.stockholm.se/ServiceGuideService/ServiceUnitTypes/9ff1c3b5-f2e9-45b4-a478-caa09d923417/<em>ServiceUnits</em>?apikey=yourpersonalkey</span>
+            </p>
+
+            <p>Det ger en lista med <span class="example-key">id</span> för alla Stockholms stad bibliotek</p>
+        </li>
+
+        <li><p>Använd <span class="example-key">id</span> för Medborgarplatsens bibliotek och hämta information om
+            Medborgarplatsens bibliotek genom att använda anropet:</p>
+
+            <p>
+
+                <span class="example-url">http://api.stockholm.se/ServiceGuideService/<em>ServiceUnits/f89d105f-8ec1-4011-972e-5995d51133fb</em>?apikey=yourpersonalkey</span>
+
+            </p>
+
+            <p class="observe">Observera att vi nu använder ett helt nytt anrop istället för att bygga på tidigare
+                anrop.</p>
+
+            <p>Vidare från svaret i detta anrop kan man t.ex.</p>
+
+            <ul>
+                <li>Lista relaterade serviceenheter</li>
+                <li>Lista enhetens attribut (bl.a. adressinformation, telefonnummer och beskrivning)</li>
+                <li>Lista dokument och filer kopplade till denna enhet</li>
+            </ul>
+
+        </li>
+
+    </ol>
+
+</section>
+
+<section>
+    <h2>
+        Förteckning enpoints
+    </h2>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Tjänst</th>
+            <th>Adress</th>
+        </tr>
+        </thead>
+        <tbody><tr>
+            <td>Komplett endpointförteckning,<br> Enhetsdatabasens API</td>
+            <td><a href="http://api.stockholm.se/ServiceGuideService/Help">http://api.stockholm.se/ServiceGuideService/Help</a>
+            </td>
+        </tr>
+        <tr>
+            <td>Komplett endpointförteckning,<br> Platsdatabasens API</td>
+            <td><a href="http://api.stockholm.se/PlaceService/Help">http://api.stockholm.se/PlaceService/Help</a></td>
+        </tr>
+        </tbody>
+    </table>
+</section>
+
+<section>
+    <h2>Parametrar</h2>
+
+    <p>Det finns ett antal endpoints som tar specialparametrar.</p>
+
+    <p>En redan nämnd endpoint är <span class="example-key">ServiceUnits</span> som tar parametern <span class="example-key">name</span> för sökning. Fler endpoints är:</p>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Endpoint/endpoints</th>
+            <th>Parameternamn</th>
+            <th>Värde</th>
+            <th>Beroende</th>
+            <th>Typ</th>
+            <th>Beskrivning</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Alla</td>
+            <td><span class="example-key">apikey</span></td>
+            <td></td>
+            <td></td>
+            <td>sträng</td>
+            <td>Din unika api-nyckel</td>
+        </tr>
+        <tr>
+        </tr><tr>
+            <td>*/json (Alla)</td>
+            <td><span class="example-key">callback</span></td>
+            <td></td>
+            <td></td>
+            <td>sträng</td>
+            <td>Omsluter svaret med ett funktionsanrop. Får verkan endast med identifikatorn <span class="example-key">/json</span>
+            </td>
+        </tr>
+        <tr>
+            <td><span class="example-key">ServiceUnits, ServiceUnitsInfos, DetailedServiceUnits</span></td>
+            <td><span class="example-key">name</span></td>
+            <td></td>
+            <td></td>
+            <td>sträng</td>
+            <td>Filtrerar på ord som förekommer i enhetens namn</td>
+        </tr>
+        <tr>
+            <td><span class="example-key">ServiceUnits, ServiceUnitsInfos, DetailedServiceUnits</span></td>
+            <td><span class="example-key">ids</span></td>
+            <td></td>
+            <td></td>
+            <td>stränglista [id1,id2,id3]</td>
+            <td>Parametern ids tar en lista av enhets-idn och retunerar endast de enheter med dess attribut som finns
+                definerad i
+                stränglistan
+            </td>
+        </tr>
+        <tr>
+            <td><span class="example-key">ServiceUnits, ServiceUnitsInfos, DetailedServiceUnits</span></td>
+            <td><span class="example-key">pageNumber</span></td>
+            <td></td>
+            <td></td>
+            <td>tal</td>
+            <td>Anger en sida i paginering</td>
+        </tr>
+        <tr>
+            <td><span class="example-key">ServiceUnits, ServiceUnitsInfos, DetailedServiceUnits</span></td>
+            <td><span class="example-key">pageSize</span></td>
+            <td></td>
+            <td><span class="example-key">pageNumber</span></td>
+            <td>tal</td>
+            <td>Anger storlek på paginering</td>
+        </tr>
+        <tr>
+            <td><span class="example-key">ServiceUnits, ServiceUnitsInfos, DetailedServiceUnits</span></td>
+            <td><span class="example-key">geographicalPosition</span></td>
+            <td></td>
+            <td></td>
+            <td>x,y (RT90 2.5 g V)</td>
+            <td>Anger en punkt utifrån sortering kommer att ske. Används t.ex. för att lista enheter "nära mig"</td>
+        </tr>
+        <tr>
+            <td><span class="example-key">ServiceUnits, ServiceUnitsInfos, DetailedServiceUnits</span></td>
+            <td><span class="example-key">sortBy</span></td>
+            <td>Unsorted | Name | DistanceToGeographicalPosition</td>
+            <td></td>
+            <td></td>
+            <td>Sortera på</td>
+        </tr>
+        <tr>
+            <td><span class="example-key">ServiceUnits, ServiceUnitsInfos, DetailedServiceUnits</span></td>
+            <td><span class="example-key">sortDirection</span></td>
+            <td>Ascending | Descending</td>
+            <td></td>
+            <td></td>
+            <td>Sorteringsordning</td>
+        </tr>
+        <tr>
+            <td><span class="example-key">ImageFiles/{id}/Data</span></td>
+            <td><span class="example-key">maxWidth</span></td>
+            <td>&gt; 0</td>
+            <td></td>
+            <td>tal</td>
+            <td>Maxbredd för bild</td>
+        </tr>
+        <tr>
+            <td><span class="example-key">ImageFiles/{id}/Data</span></td>
+            <td><span class="example-key">maxHeight</span></td>
+            <td>&gt; 0</td>
+            <td></td>
+            <td>tal</td>
+            <td>Maxhöjd för bild</td>
+        </tr>
+        <tr>
+            <td><span class="example-key">ImageFiles/{id}/Data</span></td>
+            <td><span class="example-key">allowStretching</span></td>
+            <td>false</td>
+            <td><span class="example-key">maxWidth<sup><a href="http://api.stockholm.se/dokumentation/#fn1">1</a></sup></span>, <span class="example-key">maxHeight<sup><a href="http://api.stockholm.se/dokumentation/#fn1">1</a></sup></span>,<span class="example-key">allowEnlarging<sup><a href="http://api.stockholm.se/dokumentation/#fn1">1</a></sup></span></td>
+            <td>bolesk</td>
+            <td>Tillåt bilden att stretchas.</td>
+        </tr>
+        <tr>
+            <td><span class="example-key">ImageFiles/{id}/Data</span></td>
+            <td><span class="example-key">allowEnlarging</span></td>
+            <td>false</td>
+            <td><span class="example-key">maxWidth</span>, <span class="example-key">maxHeight</span></td>
+            <td>bolesk</td>
+            <td>Tillåt bilden att förstoras</td>
+        </tr>
+        <!--<tr>-->
+        <!--<td class="example-key">ServiceUnits, ServiceUnitsInfos, DetailedServiceUnits, ServiceUnitType/{id}, ServiceUnitTypeGroups/{id} </td>-->
+        <!--<td class="example-key">geographicalAreaIdOrFriendlyIdOrName</td>-->
+        <!--<td></td>-->
+        <!--<td>GeographiclaAreaId, FriendlyId eller Name</td>-->
+        <!--<td>Adderar ytterligare en nivå av segmentering/beskärning. Möjliggör t.ex  </td>-->
+        <!--</tr>-->
+        </tbody>
+    </table>
+    <p class="observe" id="fn1">1. Stretching av bild genomförs bara om både <span class="example-key">maxheight</span>
+        och <span class="example-key">maxwidth</span> är angivna och om bilden ämnas vara under orignalbredd/höjd. Skall
+        bilden bli större än originalbredd/höjd måste parameter <span class="example-key">allowEnlarging</span> anges.
+    </p>
+
+
+</section>
+
+
+<footer>
+    <p>Senast uppdarerad:
+        <time datetime="2012-02-28">2012-02-28</time>
+    </p>
+
+    <p>© Stockholms stad</p>
+
+</footer>
+
+</article>
+
+
+<script src="./Stockholm stad enhetsdata-api-dokumentation_files/jquery-1.6.1.min.js"></script>
+<script src="./Stockholm stad enhetsdata-api-dokumentation_files/jquery-ui-1.8.13.custom-core-widgetfactory.min.js"></script>
+<script src="./Stockholm stad enhetsdata-api-dokumentation_files/jquery.sausage.js"></script>
+<script src="./Stockholm stad enhetsdata-api-dokumentation_files/shCore.js"></script>
+<script src="./Stockholm stad enhetsdata-api-dokumentation_files/shBrushXml.js"></script>
+<script type="text/javascript">
+    $(window).sausage({
+                page:'section',
+                content:function (i, $page) {
+                    return '<span class="sausage-span">' + ( i + 1 ) + ' ' + $page.find('h2').first().text() + '</span>';
+                }
+            }
+    );
+    SyntaxHighlighter.all()
+</script>
+
+<div class="extLives"></div><iframe id="rdbIndicator" width="100%" height="270" border="0" src="./Stockholm stad enhetsdata-api-dokumentation_files/indicator.htm" style="display: none; border: 0; position: fixed; left: 0; top: 0; z-index: 2147483647"></iframe><div class="vimiumReset vimiumHUD" style="right: 150px; opacity: 0; display: none;">Open multiple links in a new tab</div><div id="klip_select_container" class="klip_select_container" style="display: none;"><div id="klip_tl_draggable" class="klip_corner klip_corner_tl" style="display: none;"></div><div id="klip_br_draggable" class="klip_corner klip_corner_br" style="display: none;"></div><div id="klip_select_cancel" class="klip_button2 klip_button_cancel" style="display: none; background-image: url(chrome-extension://ipkfnchcgalnafehpglfbommidgmalan/images/delete32.png);" title="Cancel"></div><div id="klip_select_ok" class="klip_button2 klip_button_check" style="display: none; background-image: url(chrome-extension://ipkfnchcgalnafehpglfbommidgmalan/images/check32.png);" title="OK"></div><div class="klip_bounder_border"></div><div class="klip_bounder_border"></div><div class="klip_bounder_border"></div><div class="klip_bounder_border"></div><div class="klip_bounder"></div><div class="klip_tracker"></div></div><div class="sausage-set sausage-set-init"><div class="sausage" style="height:30.06100360774024px;top:40.530009839291566px;"><span class="sausage-span">1 Inledning</span></div><div class="sausage" style="height:43.820268940636275px;top:72.08658576582486px;"><span class="sausage-span">2 Revisionslogg för detta dokument</span></div><div class="sausage sausage-current" style="height:51.148573302722205px;top:116.80419809773697px;"><span class="sausage-span">3 Adresser och information</span></div><div class="sausage" style="height:29.76188914398163px;top:168.850114791735px;"><span class="sausage-span">4 Api-nyckel / authentisering</span></div><div class="sausage" style="height:29.76188914398163px;top:199.80846179075107px;"><span class="sausage-span">5 Endpoints</span></div><div class="sausage" style="height:190.08724171859626px;top:230.61725155788784px;"><span class="sausage-span">6 Listning / segmentering</span></div><div class="sausage" style="height:29.612331912102327px;top:421.75139389963925px;"><span class="sausage-span">7 
+        Sökning
+    </span></div><div class="sausage" style="height:25.12561495572319px;top:452.560183666776px;"><span class="sausage-span">8 Format</span></div><div class="sausage" style="height:47.858314201377496px;top:478.8822564775336px;"><span class="sausage-span">9 JSON och JSON med padding</span></div><div class="sausage" style="height:38.286651361102px;top:527.7874713020663px;"><span class="sausage-span">10 Felmeddelanden</span></div><div class="sausage" style="height:18.545096753033782px;top:568.0183666775991px;"><span class="sausage-span">11 Vidareutveckling och frågor</span></div><div class="sausage" style="height:96.31485733027222px;top:587.6103640537881px;"><span class="sausage-span">12 Exempel på hur APIet kan användas</span></div><div class="sausage" style="height:36.34240734667104px;top:683.9252213840604px;"><span class="sausage-span">13 
+        Förteckning enpoints
+    </span></div><div class="sausage" style="height:180.66513611020008px;top:721.1649721220072px;"><span class="sausage-span">14 Parametrar</span></div></div></body></html>

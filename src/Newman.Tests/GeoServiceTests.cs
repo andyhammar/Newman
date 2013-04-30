@@ -12,7 +12,7 @@ namespace Newman.Tests
             var service = new GeoService();
             var x = "113048,27";
             var y = "6159434,93";
-            var position = service.GetPosition(x, y);
+            var position = service.GetPositionFromRt90(x, y);
             Assert.AreEqual(55.557337, position.Lat, 0.001);
             Assert.AreEqual(12.914515, position.Lng, 0.001);
         }
