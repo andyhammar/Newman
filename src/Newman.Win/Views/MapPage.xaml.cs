@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using Bing.Maps;
 using Newman.Domain.ViewModels;
 using Newman.Win.Common;
 using Windows.UI.ApplicationSettings;
+using Windows.UI.Popups;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237
@@ -30,7 +33,8 @@ namespace Newman.Win.Views
         {
             if (e.PropertyName == "Center")
             {
-                Map.Center = new Location(_vm.Center.Lat, _vm.Center.Lng);
+                if (_vm.Center != null)
+                    Map.Center = new Location(_vm.Center.Lat, _vm.Center.Lng);
             }
         }
 
@@ -52,7 +56,24 @@ namespace Newman.Win.Views
         /// session.  This will be null the first time a page is visited.</param>
         protected async override void LoadState(Object navigationParameter, Dictionary<String, Object> pageState)
         {
-            await _vm.Init();
+            bool couldInit = false;
+            try
+            {
+                await _vm.Init();
+                couldInit = true;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.ToString());
+            }
+
+            if (!couldInit)
+            {
+
+                var messageDialog = new MessageDialog("Kunde inte hämta lekplatser, vänligen kontrollera att du har nätverksåtkomst och försök igen.");
+                await messageDialog.ShowAsync();
+                Application.Current.Exit();
+            }
         }
 
         /// <summary>
