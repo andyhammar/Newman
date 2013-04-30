@@ -1,14 +1,20 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Newman.Domain.ViewModels
 {
-    public class MapVm
+    public class MapVm : BaseVm
     {
         public MapVm()
         {
-            Playgrounds = new DataRepo().GetPlaygrounds();
         }
 
-        public IEnumerable<PlaygroundIvm> Playgrounds { get; set; } 
+        public IEnumerable<PlaygroundIvm> Playgrounds { get; set; }
+
+        public async Task Init()
+        {
+            var dataRepo = new DataRepo();
+            Playgrounds = await dataRepo.GetPlaygroundsAsync();
+        }
     }
 }

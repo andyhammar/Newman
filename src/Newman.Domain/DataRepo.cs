@@ -1,14 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Newman.Domain.ViewModels;
 
 namespace Newman.Domain
 {
-    public class DataRepo
+    public class DataRepo : IDataRepo
     {
-        public IEnumerable<PlaygroundIvm> GetPlaygrounds()
+        public Task<IEnumerable<PlaygroundIvm>> GetPlaygroundsAsync()
         {
-            return _playgroundsData.Select(CreatePlaygroundIvm);
+            return Task.Factory.StartNew(() => _playgroundsData.Select(CreatePlaygroundIvm));
         }
 
         private PlaygroundIvm CreatePlaygroundIvm(string line)

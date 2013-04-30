@@ -23,8 +23,7 @@ namespace Newman.Win.Views
             _vm = new MapVm();
             DataContext = _vm;
 
-                                    SettingsPane.GetForCurrentView().CommandsRequested += GroupedItemsPage_CommandsRequested;
-
+            SettingsPane.GetForCurrentView().CommandsRequested += GroupedItemsPage_CommandsRequested;
         }
 
 
@@ -32,7 +31,7 @@ namespace Newman.Win.Views
         {
             SettingsHelper.AddSettingsCommands(args);
         }
-        
+
 
         /// <summary>
         /// Populates the page with content passed during navigation.  Any saved state is also
@@ -43,8 +42,9 @@ namespace Newman.Win.Views
         /// </param>
         /// <param name="pageState">A dictionary of state preserved by this page during an earlier
         /// session.  This will be null the first time a page is visited.</param>
-        protected override void LoadState(Object navigationParameter, Dictionary<String, Object> pageState)
+        protected async override void LoadState(Object navigationParameter, Dictionary<String, Object> pageState)
         {
+            await _vm.Init();
         }
 
         /// <summary>
