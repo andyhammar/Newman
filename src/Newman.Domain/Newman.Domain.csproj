@@ -34,10 +34,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="DataRepoLomma.cs" />
     <Compile Include="GeoService.cs" />
     <Compile Include="IDataRepo.cs" />
     <Compile Include="ViewModels\BaseVm.cs" />
-    <Compile Include="DataRepo.cs" />
+    <Compile Include="DataRepoMalmo.cs" />
     <Compile Include="ViewModels\MapVm.cs" />
     <Compile Include="ViewModels\PlaygroundIvm.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

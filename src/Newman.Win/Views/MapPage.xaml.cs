@@ -22,8 +22,16 @@ namespace Newman.Win.Views
             this.InitializeComponent();
             _vm = new MapVm();
             DataContext = _vm;
-
+            _vm.PropertyChanged += _vm_PropertyChanged;
             SettingsPane.GetForCurrentView().CommandsRequested += GroupedItemsPage_CommandsRequested;
+        }
+
+        void _vm_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "Center")
+            {
+                Map.Center = new Location(_vm.Center.Lat, _vm.Center.Lng);
+            }
         }
 
 

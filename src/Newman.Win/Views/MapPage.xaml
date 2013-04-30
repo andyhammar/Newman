@@ -54,9 +54,10 @@
 
         <Grid Grid.Row="1">
             <maps:Map x:Name="Map" ZoomLevel="12" Credentials="AtmGITNmoR2DwPwD0ss4MMBHf4nDpMxccjuXuiO3iaqGAUwx-6dAb7-ylaTpkOrv">
-                <maps:Map.Center>
-                    <maps:Location Longitude="13.011675" Latitude="55.595032"/>
-                </maps:Map.Center>
+                <!--<maps:Map.Center>-->
+                    <!--<maps:Location Longitude="13.011675" Latitude="55.595032"/>-->
+                    <!--<maps:Location Longitude="{Binding Center.Lng}" Latitude="{Binding Center.Lat}"/>-->
+                <!--</maps:Map.Center>-->
                 <maps:MapItemsControl 
                     ItemsSource="{Binding Playgrounds}"
                     ItemTemplate="{StaticResource PushpinTemplate}"/>

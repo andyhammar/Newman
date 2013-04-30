@@ -5,7 +5,7 @@ using Newman.Domain.ViewModels;
 
 namespace Newman.Domain
 {
-    public class DataRepo : IDataRepo
+    public class DataRepoMalmo : IDataRepo
     {
         public Task<IEnumerable<PlaygroundIvm>> GetPlaygroundsAsync()
         {
