@@ -48,7 +48,8 @@
                             <map:Pushpin 
                                 Tag="{Binding}" 
                                 Tap="Pushpin_OnTap"
-                                Location="{Binding Position, Converter={StaticResource PosToLocConverter}}"
+                                Background="#D6371B"
+                                Location="{Binding Position, Converter={StaticResource PosToLocConverter}}" Foreground="#FFD6371B"
                                 >
                                 
                                 <!--<map:MapLayer.Position>

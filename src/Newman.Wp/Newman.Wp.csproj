@@ -96,9 +96,6 @@
     <Content Include="Assets\logo-50.png" />
     <Content Include="Assets\logo-62.png" />
     <Content Include="Assets\logo-99.png" />
-    <Content Include="Background.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="logo-173.png" />
     <Content Include="logo-62.png" />
   </ItemGroup>
