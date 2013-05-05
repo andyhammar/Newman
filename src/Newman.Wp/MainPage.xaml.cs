@@ -1,5 +1,8 @@
 ﻿using System.Device.Location;
+using System.Windows;
+using System.Windows.Input;
 using Microsoft.Phone.Controls;
+using Microsoft.Phone.Controls.Maps;
 using Microsoft.Phone.Controls.Maps.Platform;
 using Newman.Domain.ViewModels;
 
@@ -32,6 +35,19 @@ namespace Newman.Wp
             base.OnNavigatedTo(e);
 
             await _vm.Init();
+        }
+
+        private void Pushpin_OnTap(object sender, GestureEventArgs e)
+        {
+            var ivm = (sender as Pushpin).Tag as PlaygroundIvm;
+            ShowInfo(ivm);
+        }
+
+        private void ShowInfo(PlaygroundIvm ivm)
+        {
+            string caption = ivm.Name;
+            string text = ivm.FullText;
+            MessageBox.Show(text, caption, MessageBoxButton.OK);
         }
     }
 }
